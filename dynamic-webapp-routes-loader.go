@@ -1,6 +1,6 @@
 package main
 
-import("io/ioutil";"time";"os";"encoding/json";"sync";"log")
+import("io/ioutil"; "time"; "os"; "encoding/json"; "sync"; "log")
 
 var dynamicRoutes map[string]string
 var addRoutesMutex *sync.RWMutex
@@ -20,7 +20,7 @@ func init() {
 // load and convert the json content into map
 func loadDynamicRoutes() {
 	
-	routesFile, err := os.Open("config/dynamic-routes.json")
+    routesFile, err := os.Open("config/dynamic-routes.json")
     if err != nil {
         log.Println("[ Eror ] Failed to load dynamic routes file. ErrMsg -", err)
         os.Exit(1)
@@ -28,9 +28,9 @@ func loadDynamicRoutes() {
     defer routesFile.Close()
     latestStat, err = routesFile.Stat()
     if err != nil {
-		log.Println("[ Eror ] Failed to get latest statistics of dynamic routes file. ErrMsg -", err)
-		return
-	}
+	log.Println("[ Eror ] Failed to get latest statistics of dynamic routes file. ErrMsg -", err)
+	return
+    }
     
     // convert the content into byte array
     routesBytes, err := ioutil.ReadAll(routesFile)
@@ -59,9 +59,9 @@ func loadDynamicRoutes() {
     addRoutesMutex.RLock()
     for route, url := range dynamicRoutes {
     	log.Println("route", route, "url:", url)
-	}
-	log.Printf("Current Number Of Routes Is : %d\n\n", len(dynamicRoutes))
-	addRoutesMutex.RUnlock()
+    }
+    log.Printf("Current Number Of Routes Is : %d\n\n", len(dynamicRoutes))
+    addRoutesMutex.RUnlock()
 }
 
 
