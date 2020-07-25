@@ -67,17 +67,17 @@ func loadDynamicRoutes() {
 
 // check every interval minute and update if changes
 func updateDynamicRoutes(interval int) {
-	for {
-		stat, err := os.Stat("config/dynamic-routes.json")
-		if err != nil {
-			log.Println("[ Eror ] Failed to get statistics of dynamic routes file. ErrMsg -", err)
-		} else {
-			if stat.Size() != latestStat.Size() || stat.ModTime() != latestStat.ModTime() {
-				loadDynamicRoutes() // load only when size or latest modification time changed
-			}
+    for {
+        stat, err := os.Stat("config/dynamic-routes.json")
+            if err != nil {
+		log.Println("[ Eror ] Failed to get statistics of dynamic routes file. ErrMsg -", err)
+	    } else {
+		if stat.Size() != latestStat.Size() || stat.ModTime() != latestStat.ModTime() {
+		    loadDynamicRoutes() // load only when size or latest modification time changed
 		}
-		time.Sleep(time.Duration(interval) * time.Minute)
-	}
+	    }
+        time.Sleep(time.Duration(interval) * time.Minute)
+    }
 }
 
 // change this file dynamic-routes.json content and observe
