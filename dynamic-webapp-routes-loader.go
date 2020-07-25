@@ -89,7 +89,7 @@ func main() {
 
 // bonus function snippet for checking dynamic routes
 func checkDynamicRoutes(w http.ResponseWriter, r *http.Request) { 
-	addRoutesMutex.Rlock() // grab the lock for reading the map
+	addRoutesMutex.RLock() // grab the lock for reading the map
 	if targetURL, found := dynamicRoutes[r.URL.String()]; found {
 		addRoutesMutex.RUnlock() // make sure to release that
 		http.Redirect(w, r, targetURL, http.StatusMovedPermanently)
