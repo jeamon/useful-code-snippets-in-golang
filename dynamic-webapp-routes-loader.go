@@ -86,3 +86,16 @@ func main() {
 	go updateDynamicRoutes(2) // check to update each 2 min if any changes
 	<- doneChan
 }
+
+// bonus function snippet for checking dynamic routes
+func checkDynamicRoutes(w http.ResponseWriter, r *http.Request) { 
+	addRoutesMutex.Rlock() // grab the lock for reading the map
+	if targetURL, found := dynamicRoutes[r.URL.String()]; found {
+		addRoutesMutex.RUnlock() // make sure to release that
+		http.Redirect(w, r, targetURL, http.StatusMovedPermanently)
+		return
+	} else {
+		// not found routine goes here
+		log.Println("unknown requested path - thank you.")
+	}
+}
