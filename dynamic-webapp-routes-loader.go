@@ -88,7 +88,7 @@ func main() {
 }
 
 
-/* function to call into your NOTFOUND HANDLER for checking dynamic routes
+//* function to call into your NOTFOUND HANDLER for checking dynamic routes
 func checkDynamicRoutes(w http.ResponseWriter, r *http.Request) { 
 	
 	addRoutesMutex.Rlock()
